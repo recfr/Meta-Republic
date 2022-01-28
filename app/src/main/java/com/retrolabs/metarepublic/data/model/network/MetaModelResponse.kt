@@ -1,6 +1,4 @@
-package com.retrolabs.metarepublic.data.model
-
-import com.retrolabs.metarepublic.data.model.network.MetaDetailsResponse
+package com.retrolabs.metarepublic.data.model.network
 
 data class MetaModelResponse(
     val templating: Int?,

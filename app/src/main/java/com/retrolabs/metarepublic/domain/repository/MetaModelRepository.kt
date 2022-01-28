@@ -7,15 +7,15 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import com.retrolabs.metarepublic.data.remote.ApiCallService.apiCall
-import com.retrolabs.metarepublic.data.model.MetaModelResponse
 import com.retrolabs.metarepublic.data.local.MetaverseDao
-import com.retrolabs.metarepublic.data.local.MetaverseDatabase.Companion.getDatabase
 import com.retrolabs.metarepublic.data.mapper.MetaModelMapper
 import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
+import com.retrolabs.metarepublic.data.model.network.MetaModelResponse
+import com.retrolabs.metarepublic.data.remote.ApiCallService.apiCall
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject
+
 
 class MetaModelRepositoryImpl @Inject constructor(
     @ApplicationContext val context: Context,
@@ -23,11 +23,10 @@ class MetaModelRepositoryImpl @Inject constructor(
     private val metaModelMapper: MetaModelMapper
 ) : MetaverseRepository {
 
-    // TODO refresh policy ?
-    // work_manager
+    // research for work_manager
 
     override suspend fun refreshData() {
-        getMetaModel().onSuccess{ response ->
+        getMetaModel().onSuccess { response ->
             val metaModelEntityList = response.metaverse.map { metaModelMapper.mapMetaModelEntity(it) }
             dao.updateMetaverseList(metaModelEntityList)
         }
@@ -60,7 +59,7 @@ class MetaModelRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Room DB Repo Functions
+     * Room Database Functions
      */
     override fun getAllMetaverse(): LiveData<List<MetaDetailsEntity>> {
         return dao.getAllMetaverse()

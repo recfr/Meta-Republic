@@ -41,7 +41,7 @@ interface MetaverseDao {
      * returns 1 else returns 0 if the DELETE operation is unsuccessful.
      */
     @Delete
-    suspend fun deleteMetaverse(metaDetailsEntity: MetaDetailsEntity) : Int
+    suspend fun deleteMetaverse(metaDetailsEntity: MetaDetailsEntity): Int
 
     /**
      * Delete all metaverse database.

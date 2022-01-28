@@ -1,6 +1,6 @@
 package com.retrolabs.metarepublic.data.remote
 
-import com.retrolabs.metarepublic.data.model.MetaModelResponse
+import com.retrolabs.metarepublic.data.model.network.MetaModelResponse
 import com.retrolabs.metarepublic.utils.MockDataInterceptor.Companion.MOCK_METAVERSE_DETAIL_URL
 import retrofit2.Response
 import retrofit2.http.GET
