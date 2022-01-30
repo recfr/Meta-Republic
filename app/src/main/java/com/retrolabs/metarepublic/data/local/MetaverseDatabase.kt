@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.retrolabs.metarepublic.data.model.database.FavoriteMetaEntity
 import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
 
+
 @Database(entities = [MetaDetailsEntity::class, FavoriteMetaEntity::class], version = 1, exportSchema = false)
 abstract class MetaverseDatabase : RoomDatabase() {
 

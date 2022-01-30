@@ -3,6 +3,7 @@ package com.retrolabs.metarepublic.data.model.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 
 @Entity(tableName = "metaverse_table")
 data class MetaDetailsEntity(

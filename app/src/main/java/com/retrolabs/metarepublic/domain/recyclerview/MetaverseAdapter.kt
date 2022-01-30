@@ -32,7 +32,6 @@ class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHold
                 metaverseList[adapterPosition].metaTokenName!!,
                 metaverseList[adapterPosition].metaInfo!!
             )
-            println("consoleCheck:" + metaverseList[adapterPosition].metaName!!)
 
             itemView.findNavController().navigate(action)
         }

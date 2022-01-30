@@ -24,7 +24,7 @@ interface MetaverseDao {
      * parameters into the appropriate table in the database.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNewMetaverse(metaDetailsEntity: MetaDetailsEntity)
+    suspend fun insertMetaModelEntity(metaDetailsEntity: MetaDetailsEntity)
 
     /**
      * The @Update annotation allows you to define methods that update specific rows in a database table.
@@ -34,6 +34,12 @@ interface MetaverseDao {
     suspend fun updateMetaverseList(metaDetailsEntity: List<MetaDetailsEntity>)
 
     /**
+     * Favorite Lists Methods
+     */
+    @Insert
+    suspend fun insertFavorite(metaDetailsEntity: MetaDetailsEntity)
+
+    /**
      * The @Delete annotation allows you to define methods that delete specific rows from a database table.
      * Similarly to @Insert methods, @Delete methods accept data entity instances as parameters.
      *
@@ -41,11 +47,8 @@ interface MetaverseDao {
      * returns 1 else returns 0 if the DELETE operation is unsuccessful.
      */
     @Delete
-    suspend fun deleteMetaverse(metaDetailsEntity: MetaDetailsEntity): Int
+    suspend fun deleteFavorite(metaDetailsEntity: MetaDetailsEntity)
 
-    /**
-     * Delete all metaverse database.
-     */
-    @Query("DELETE FROM metaverse_table")
-    suspend fun deleteAll()
+    @Query("DELETE FROM favorite_table")
+    suspend fun deleteAllFavorites()
 }

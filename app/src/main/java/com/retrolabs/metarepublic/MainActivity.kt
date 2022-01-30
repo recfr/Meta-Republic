@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
          * Setting up the top level destinations to prevent to availability of back button's in this pages.
          */
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.searchFragment), drawerLayout
+            setOf(R.id.homeFragment), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || return super.onSupportNavigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.nav_menu, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.nav_menu, menu)
+//        return true
+//    }
 }

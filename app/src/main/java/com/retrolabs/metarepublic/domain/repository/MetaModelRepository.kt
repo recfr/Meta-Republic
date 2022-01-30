@@ -23,12 +23,13 @@ class MetaModelRepositoryImpl @Inject constructor(
     private val metaModelMapper: MetaModelMapper
 ) : MetaverseRepository {
 
-    // research for work_manager
-
     override suspend fun refreshData() {
+
         getMetaModel().onSuccess { response ->
             val metaModelEntityList = response.metaverse.map { metaModelMapper.mapMetaModelEntity(it) }
-            dao.updateMetaverseList(metaModelEntityList)
+            metaModelEntityList.forEach {
+                dao.insertMetaModelEntity(it)
+            }
         }
     }
 
@@ -36,6 +37,7 @@ class MetaModelRepositoryImpl @Inject constructor(
      * If device has network connection, run this method.
      */
     private suspend fun getMetaModel(): Result<MetaModelResponse> {
+
         val response = apiCall.getMetaverseList()
 
         return if (response.isSuccessful) {
@@ -49,6 +51,7 @@ class MetaModelRepositoryImpl @Inject constructor(
      * If device has no network connection, run this method.
      */
     private suspend fun getMockMetaModel(): Result<MetaModelResponse?> {
+
         val response = apiCall.getMockMetaverseList()
 
         return if (response.isSuccessful) {
@@ -59,26 +62,18 @@ class MetaModelRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Room Database Functions
+     * Override MetaverseRepository Room Database Functions
      */
     override fun getAllMetaverse(): LiveData<List<MetaDetailsEntity>> {
         return dao.getAllMetaverse()
     }
 
     override suspend fun insertNewMetaverse(metaDetailsEntity: MetaDetailsEntity) {
-        dao.insertNewMetaverse(metaDetailsEntity)
+        dao.insertMetaModelEntity(metaDetailsEntity)
     }
 
     override suspend fun updateMetaverseList(metaDetailsEntityList: List<MetaDetailsEntity>) {
         dao.updateMetaverseList(metaDetailsEntityList)
-    }
-
-    override suspend fun deleteMetaverse(metaDetailsEntity: MetaDetailsEntity) {
-        dao.deleteMetaverse(metaDetailsEntity)
-    }
-
-    override suspend fun deleteAll() {
-        dao.deleteAll()
     }
 
     /**
@@ -88,6 +83,7 @@ class MetaModelRepositoryImpl @Inject constructor(
      */
     @RequiresApi(Build.VERSION_CODES.M)
     fun isOnline(context: Context): Boolean {
+
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 

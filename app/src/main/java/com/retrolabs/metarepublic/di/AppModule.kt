@@ -19,7 +19,8 @@ class AppModule {
     @Provides
     fun providesMetaverseDatabase(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, MetaverseDatabase::class.java, "metaverse_database")
-            .fallbackToDestructiveMigration().build()
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun providesMetaverseDao(metaverseDatabase: MetaverseDatabase): MetaverseDao {

@@ -23,25 +23,4 @@ class HomeFragmentViewModel @Inject constructor(
 
     val metaModelLiveData: LiveData<List<MetaDetailsEntity>>
         get() = metaverseRepository.getAllMetaverse()
-
-//    fun updateMetaverseList(metaModelResponse: MetaModelResponse) {
-//        viewModelScope.launch {
-//            metaverseRepository.updateMetaverseList(metaModelResponse)
-//        }
-//    }
-
-    fun deleteAll() {
-        viewModelScope.launch {
-            metaverseRepository.deleteAll()
-        }
-    }
-
-    /**
-     * Use for delete from favorites. That means database needs "favorites_table" too.
-     */
-    fun deleteMetaverse(metaDetailsEntity: MetaDetailsEntity) {
-        viewModelScope.launch {
-            metaverseRepository.deleteMetaverse(metaDetailsEntity)
-        }
-    }
 }
