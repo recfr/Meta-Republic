@@ -8,26 +8,28 @@ import com.retrolabs.metarepublic.domain.repository.FavoriteRepositoryImpl
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavoriteFragmentViewModel @Inject constructor(private val favoriteRepositoryImpl: FavoriteRepositoryImpl) : ViewModel() {
+class FavoriteFragmentViewModel @Inject constructor(
+    private val favoriteRepositoryImpl: FavoriteRepositoryImpl
+) : ViewModel() {
 
     val favoriteLiveData: LiveData<List<MetaDetailsEntity>>
         get() = favoriteRepositoryImpl.getAllFavorites()
 
-    private fun insertFavorite() {
+    fun insertFavorite(metaDetailsEntity: MetaDetailsEntity) {
         viewModelScope.launch {
-
+            favoriteRepositoryImpl.insertFavorite(metaDetailsEntity)
         }
     }
 
-    private fun deleteFavorite() {
+    fun deleteFavorite(metaDetailsEntity: MetaDetailsEntity) {
         viewModelScope.launch {
-
+            favoriteRepositoryImpl.deleteFavorite(metaDetailsEntity)
         }
     }
 
-    private fun deleteAllFavorites() {
+    fun deleteAllFavorites() {
         viewModelScope.launch {
-
+            favoriteRepositoryImpl.deleteAllFavorites()
         }
     }
 }
