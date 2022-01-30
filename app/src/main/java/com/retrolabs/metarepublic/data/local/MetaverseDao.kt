@@ -36,6 +36,9 @@ interface MetaverseDao {
     /**
      * Favorite Lists Methods
      */
+    @Query("SELECT * FROM favorite_table ORDER BY meta_id")
+    fun getAllFavorites(): LiveData<List<MetaDetailsEntity>>
+
     @Insert
     suspend fun insertFavorite(metaDetailsEntity: MetaDetailsEntity)
 
