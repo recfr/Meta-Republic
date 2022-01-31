@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.retrolabs.metarepublic.R
 import com.retrolabs.metarepublic.ui.viewmodel.FavoriteFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private val viewModel: FavoriteFragmentViewModel by viewModels()
 
@@ -26,5 +27,4 @@ class FavoriteFragment : Fragment() {
 
 
     }
-
 }
