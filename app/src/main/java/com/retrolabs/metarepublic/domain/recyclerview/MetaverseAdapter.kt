@@ -11,11 +11,13 @@ import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
 import com.retrolabs.metarepublic.databinding.AdapterItemMetaverseBinding
 import com.retrolabs.metarepublic.ui.HomeFragmentDirections
 
-class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
+class MetaverseAdapter(
+    private val setFavorite: (MetaDetailsEntity) -> Unit
+) : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
 
     private var metaverseList = emptyList<MetaDetailsEntity>()
 
-    inner class MetaverseViewHolder(private val binding: AdapterItemMetaverseBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MetaverseViewHolder(val binding: AdapterItemMetaverseBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
@@ -53,7 +55,18 @@ class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHold
     }
 
     override fun onBindViewHolder(holder: MetaverseViewHolder, position: Int) {
-        holder.bind(metaverseList[position])
+        val item = metaverseList[position]
+        holder.bind(item)
+
+        holder.binding.imageViewFavorite.setOnClickListener {
+            if (item.isFavorite) {
+                setFavorite.invoke(MetaDetailsEntity(
+                    item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, false))
+            } else {
+                setFavorite.invoke(MetaDetailsEntity(
+                    item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, true))
+            }
+        }
     }
 
     override fun getItemCount(): Int {

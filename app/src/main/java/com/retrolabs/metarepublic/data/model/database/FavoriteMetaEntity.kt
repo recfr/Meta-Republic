@@ -20,5 +20,5 @@ data class FavoriteMetaEntity(
     @ColumnInfo(name = "meta_info")
     val metaInfo: String?,
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean? = false
+    val isFavorite: Boolean = false
 )
