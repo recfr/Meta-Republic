@@ -77,22 +77,24 @@
                 tools:text="Single line information" />
 
             <ImageView
-                android:id="@+id/imageView_is_favorite"
+                android:id="@+id/imageView_favorite"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 card_view:layout_constraintBottom_toBottomOf="@+id/textView_info"
                 card_view:layout_constraintEnd_toEndOf="@id/imageView_thumbnail"
                 card_view:layout_constraintTop_toBottomOf="@+id/imageView_thumbnail"
-                tools:srcCompat="@drawable/ic_favorite"/>
+                tools:srcCompat="@drawable/ic_favorite"
+                android:contentDescription="@string/favorite_icon" />
 
             <ImageView
-                android:id="@+id/imageView_is_favorite_border"
+                android:id="@+id/imageView_favorite_border"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 card_view:layout_constraintBottom_toBottomOf="@+id/textView_info"
                 card_view:layout_constraintEnd_toEndOf="@id/imageView_thumbnail"
                 card_view:layout_constraintTop_toBottomOf="@+id/imageView_thumbnail"
-                tools:srcCompat="@drawable/ic_favorite_border" />
+                tools:srcCompat="@drawable/ic_favorite_border"
+                android:contentDescription="@string/favorite_border_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
