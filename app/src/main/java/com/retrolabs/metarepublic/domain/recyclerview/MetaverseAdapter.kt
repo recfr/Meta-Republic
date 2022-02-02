@@ -4,16 +4,16 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.retrolabs.metarepublic.R
 import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
 import com.retrolabs.metarepublic.databinding.AdapterItemMetaverseBinding
 import com.retrolabs.metarepublic.ui.HomeFragmentDirections
 
-class MetaverseAdapter(
-    private val setFavorite: (MetaDetailsEntity) -> Unit
-) : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
+class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
 
     private var metaverseList = emptyList<MetaDetailsEntity>()
 
@@ -44,6 +44,7 @@ class MetaverseAdapter(
                 it.textViewMetaverseName.text = metaDetailsEntity.metaName
                 it.textViewToken.text = metaDetailsEntity.metaTokenName
                 it.textViewInfo.text = metaDetailsEntity.metaInfo
+
             }
         }
     }
@@ -58,15 +59,28 @@ class MetaverseAdapter(
         val item = metaverseList[position]
         holder.bind(item)
 
-        holder.binding.imageViewFavorite.setOnClickListener {
-            if (item.isFavorite) {
-                setFavorite.invoke(MetaDetailsEntity(
-                    item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, false))
-            } else {
-                setFavorite.invoke(MetaDetailsEntity(
-                    item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, true))
-            }
-        }
+//        holder.binding.imageViewFavorite.setImageDrawable(
+//            ResourcesCompat.getDrawable(
+//                holder.itemView.context.resources,
+//                if (item.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border, null
+//            )
+//        )
+
+//        holder.binding.imageViewFavorite.setOnClickListener {
+//            if (item.isFavorite) {
+//                setFavorite.invoke(
+//                    MetaDetailsEntity(
+//                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, false
+//                    )
+//                )
+//            } else {
+//                setFavorite.invoke(
+//                    MetaDetailsEntity(
+//                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, true
+//                    )
+//                )
+//            }
+//        }
     }
 
     override fun getItemCount(): Int {

@@ -23,4 +23,10 @@ class HomeFragmentViewModel @Inject constructor(
 
     val metaModelLiveData: LiveData<List<MetaDetailsEntity>>
         get() = metaverseRepository.getAllMetaverse()
+
+    fun insertFavorite(metaDetailsEntity: MetaDetailsEntity) {
+        viewModelScope.launch {
+            metaverseRepository.insertFavorites(metaDetailsEntity)
+        }
+    }
 }

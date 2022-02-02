@@ -64,37 +64,27 @@
 
             <TextView
                 android:id="@+id/textView_info"
-                android:layout_width="wrap_content"
+                android:layout_width="325dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingBottom="6dp"
                 android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/imageView_thumbnail"
-                card_view:layout_constraintStart_toStartOf="@id/textView_metaverse_name"
-                card_view:layout_constraintTop_toBottomOf="@id/textView_metaverse_name"
-                tools:text="Single line information" />
+                card_view:layout_constraintEnd_toEndOf="@+id/imageView_favorite"
+                card_view:layout_constraintHorizontal_bias="0.0"
+                card_view:layout_constraintStart_toStartOf="@+id/textView_metaverse_name"
+                card_view:layout_constraintTop_toBottomOf="@+id/textView_metaverse_name"
+                tools:text="Single line information Single line information " />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/imageView_favorite"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                card_view:layout_constraintBottom_toBottomOf="@+id/textView_info"
+                android:background="@drawable/ic_favorite_border"
+                android:contentDescription="@string/favorite_icon"
+                card_view:layout_constraintBottom_toTopOf="@+id/textView_info"
                 card_view:layout_constraintEnd_toEndOf="@id/imageView_thumbnail"
-                card_view:layout_constraintTop_toBottomOf="@+id/imageView_thumbnail"
-                tools:srcCompat="@drawable/ic_favorite"
-                android:contentDescription="@string/favorite_icon" />
-
-            <ImageView
-                android:id="@+id/imageView_favorite_border"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                card_view:layout_constraintBottom_toBottomOf="@+id/textView_info"
-                card_view:layout_constraintEnd_toEndOf="@id/imageView_thumbnail"
-                card_view:layout_constraintTop_toBottomOf="@+id/imageView_thumbnail"
-                tools:srcCompat="@drawable/ic_favorite_border"
-                android:contentDescription="@string/favorite_border_icon" />
+                card_view:layout_constraintTop_toBottomOf="@+id/imageView_thumbnail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -76,6 +76,10 @@ class MetaModelRepositoryImpl @Inject constructor(
         dao.updateMetaverseList(metaDetailsEntityList)
     }
 
+    override suspend fun insertFavorites(metaDetailsEntity: MetaDetailsEntity) {
+        dao.insertFavorite(metaDetailsEntity)
+    }
+
     /**
      * Check network connection
      * liveData/useCase ?
@@ -107,7 +111,7 @@ class MetaModelRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Check is metaverse_database Room Database existing.
+     * Check is Room Database existing "metaverse_database".
      */
     private fun isDatabaseExist(context: Context, databaseName: String): Boolean {
         val databaseFile: File = context.getDatabasePath(databaseName)

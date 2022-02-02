@@ -12,4 +12,6 @@ interface MetaverseRepository {
     suspend fun insertNewMetaverse(metaDetailsEntity: MetaDetailsEntity)
 
     suspend fun updateMetaverseList(metaDetailsEntityList: List<MetaDetailsEntity>)
+
+    suspend fun insertFavorites(metaDetailsEntity: MetaDetailsEntity)
 }

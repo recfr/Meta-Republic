@@ -15,6 +15,10 @@ class FavoriteFragmentViewModel @Inject constructor(
     val favoriteLiveData: LiveData<List<MetaDetailsEntity>>
         get() = favoriteRepositoryImpl.getAllFavorites()
 
+
+    /**
+     * do not need that function here.
+     */
     fun insertFavorite(metaDetailsEntity: MetaDetailsEntity) {
         viewModelScope.launch {
             favoriteRepositoryImpl.insertFavorite(metaDetailsEntity)
