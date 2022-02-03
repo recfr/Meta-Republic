@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.retrolabs.metarepublic.R
 import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
-import com.retrolabs.metarepublic.databinding.AdapterItemMetaverseBinding
 import com.retrolabs.metarepublic.databinding.FragmentHomeBinding
 import com.retrolabs.metarepublic.domain.recyclerview.MetaverseAdapter
 import com.retrolabs.metarepublic.ui.viewmodel.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -25,7 +23,6 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeFragmentViewModel by viewModels()
     private val setFavorite: (MetaDetailsEntity) -> Unit = { viewModel.insertFavorite(it) }
     private val metaverseAdapter = MetaverseAdapter(setFavorite)
-    //private val metaverseAdapter = MetaverseAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +45,6 @@ class HomeFragment : Fragment() {
 
         viewModel.metaModelLiveData.observe(viewLifecycleOwner, { metaModelEntityList ->
             metaverseAdapter.setData(metaModelEntityList)
-//            metaverseAdapter.submitList(metaModelEntityList)
         })
 
     }
