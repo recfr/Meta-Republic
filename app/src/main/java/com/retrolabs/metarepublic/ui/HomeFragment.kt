@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.retrolabs.metarepublic.R
+import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
+import com.retrolabs.metarepublic.databinding.AdapterItemMetaverseBinding
 import com.retrolabs.metarepublic.databinding.FragmentHomeBinding
 import com.retrolabs.metarepublic.domain.recyclerview.MetaverseAdapter
 import com.retrolabs.metarepublic.ui.viewmodel.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -20,7 +23,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeFragmentViewModel by viewModels()
-    private val metaverseAdapter = MetaverseAdapter()
+    private val setFavorite: (MetaDetailsEntity) -> Unit = { viewModel.insertFavorite(it) }
+    private val metaverseAdapter = MetaverseAdapter(setFavorite)
+    //private val metaverseAdapter = MetaverseAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +34,10 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        val setFavorite: (MetaDetailsEntity) -> Unit = { viewModel.insertFavorite(it) }
-
-        with(binding) {
-
-//            recyclerview.adapter = MetaverseAdapter(setFavorite)
-            recyclerview.adapter = metaverseAdapter
-            recyclerview.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        with(binding.recyclerview) {
+            adapter = metaverseAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            setHasFixedSize(true)
         }
         return binding.root
     }
@@ -46,8 +48,9 @@ class HomeFragment : Fragment() {
 
         viewModel.metaModelLiveData.observe(viewLifecycleOwner, { metaModelEntityList ->
             metaverseAdapter.setData(metaModelEntityList)
-//            metaverseAdapter.MetaverseViewHolder().binding.imageViewFavorite.setOnClickListener { }
+//            metaverseAdapter.submitList(metaModelEntityList)
         })
+
     }
 
     override fun onDestroyView() {

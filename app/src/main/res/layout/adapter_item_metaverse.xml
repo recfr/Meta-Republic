@@ -78,8 +78,8 @@
 
             <ImageButton
                 android:id="@+id/imageView_favorite"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@drawable/ic_favorite_border"
                 android:contentDescription="@string/favorite_icon"
                 card_view:layout_constraintBottom_toTopOf="@+id/textView_info"

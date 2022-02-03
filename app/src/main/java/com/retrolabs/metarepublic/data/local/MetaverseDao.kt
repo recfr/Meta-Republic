@@ -36,10 +36,10 @@ interface MetaverseDao {
     /**
      * Favorite Lists Methods
      */
-    @Query("SELECT * FROM favorite_table ORDER BY meta_id")
-    fun getAllFavorites(): LiveData<List<MetaDetailsEntity>>
+    @Query("SELECT * FROM favorite_table WHERE is_favorite=:fav ORDER BY meta_id DESC")
+    fun getAllFavorites(fav: Boolean): LiveData<List<MetaDetailsEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(metaDetailsEntity: MetaDetailsEntity)
 
     /**

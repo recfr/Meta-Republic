@@ -12,8 +12,11 @@ import com.retrolabs.metarepublic.R
 import com.retrolabs.metarepublic.data.model.database.MetaDetailsEntity
 import com.retrolabs.metarepublic.databinding.AdapterItemMetaverseBinding
 import com.retrolabs.metarepublic.ui.HomeFragmentDirections
+import javax.inject.Inject
 
-class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
+
+class MetaverseAdapter @Inject constructor(private val setFavorite: (MetaDetailsEntity) -> Unit) :
+    RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHolder>() {
 
     private var metaverseList = emptyList<MetaDetailsEntity>()
 
@@ -22,6 +25,17 @@ class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHold
         init {
             itemView.setOnClickListener {
                 navigateToDetails(metaverseList, it)
+            }
+        }
+
+        fun bind(metaDetailsEntity: MetaDetailsEntity) {
+
+            binding.let {
+                Glide.with(itemView.context).load(metaDetailsEntity.metaMedia).into(it.imageViewThumbnail)
+                it.textViewMetaverseName.text = metaDetailsEntity.metaName
+                it.textViewToken.text = metaDetailsEntity.metaTokenName
+                it.textViewInfo.text = metaDetailsEntity.metaInfo
+
             }
         }
 
@@ -38,15 +52,6 @@ class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHold
             itemView.findNavController().navigate(action)
         }
 
-        fun bind(metaDetailsEntity: MetaDetailsEntity) {
-            binding.let {
-                Glide.with(itemView.context).load(metaDetailsEntity.metaMedia).into(it.imageViewThumbnail)
-                it.textViewMetaverseName.text = metaDetailsEntity.metaName
-                it.textViewToken.text = metaDetailsEntity.metaTokenName
-                it.textViewInfo.text = metaDetailsEntity.metaInfo
-
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetaverseViewHolder {
@@ -59,28 +64,24 @@ class MetaverseAdapter : RecyclerView.Adapter<MetaverseAdapter.MetaverseViewHold
         val item = metaverseList[position]
         holder.bind(item)
 
-//        holder.binding.imageViewFavorite.setImageDrawable(
-//            ResourcesCompat.getDrawable(
-//                holder.itemView.context.resources,
-//                if (item.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border, null
-//            )
-//        )
+        holder.binding.imageViewFavorite.setImageDrawable(
+            ResourcesCompat.getDrawable(
+                holder.itemView.context.resources,
+                if (item.isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border, null
+            )
+        )
 
-//        holder.binding.imageViewFavorite.setOnClickListener {
-//            if (item.isFavorite) {
-//                setFavorite.invoke(
-//                    MetaDetailsEntity(
-//                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, false
-//                    )
-//                )
-//            } else {
-//                setFavorite.invoke(
-//                    MetaDetailsEntity(
-//                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, true
-//                    )
-//                )
-//            }
-//        }
+        holder.binding.imageViewFavorite.setOnClickListener {
+            if (item.isFavorite) {
+                setFavorite.invoke(
+                    MetaDetailsEntity(
+                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, false))
+            } else {
+                setFavorite.invoke(
+                    MetaDetailsEntity(
+                        item.metaId, item.metaName, item.metaUri, item.metaTokenName, item.metaMedia, item.metaInfo, true))
+            }
+        }
     }
 
     override fun getItemCount(): Int {

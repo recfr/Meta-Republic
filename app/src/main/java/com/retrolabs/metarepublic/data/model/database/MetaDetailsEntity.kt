@@ -18,7 +18,7 @@ data class MetaDetailsEntity(
     @ColumnInfo(name = "meta_media")
     val metaMedia: String?,
     @ColumnInfo(name = "meta_info")
-    val metaInfo: String?
-//    @ColumnInfo(name = "is_favorite")
-//    val isFavorite: Boolean = false
+    val metaInfo: String?,
+    @ColumnInfo(name = "is_favorite")
+    val isFavorite: Boolean = false
 )
