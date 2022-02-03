@@ -36,8 +36,8 @@ interface MetaverseDao {
     /**
      * Favorite Lists Methods
      */
-    @Query("SELECT * FROM favorite_table WHERE is_favorite=:fav ORDER BY meta_id DESC")
-    fun getAllFavorites(fav: Boolean): LiveData<List<MetaDetailsEntity>>
+    @Query("SELECT * FROM metaverse_table WHERE is_favorite='1'ORDER BY meta_id DESC")
+    fun getAllFavorites(): LiveData<List<MetaDetailsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(metaDetailsEntity: MetaDetailsEntity)
@@ -52,6 +52,4 @@ interface MetaverseDao {
     @Delete
     suspend fun deleteFavorite(metaDetailsEntity: MetaDetailsEntity)
 
-    @Query("DELETE FROM favorite_table")
-    suspend fun deleteAllFavorites()
 }
